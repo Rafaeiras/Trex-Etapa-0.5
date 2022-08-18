@@ -17,16 +17,22 @@ function setup(){
   //adicione dimensão e posição ao trex
   trex.scale = 0.5;
   trex.x = 50
+
+  ground = createSprite (200,180,400,20);
+  ground.addImage ("ground", groundImage);
+  ground.x = ground.width/2;
 }
 
 
 function draw(){
   //definir a cor do plano de fundo 
   background("white");
+  ground.velocityX = -2;
   
-  //registrando a posição y do trex
   console.log(trex.y)
-  
+  if (ground.x < 0){
+    ground.x = ground.width/2;
+  }
   //pular quando tecla de espaço for pressionada
   if(keyDown("space")){
     trex.velocityY = -10;
@@ -35,6 +41,6 @@ function draw(){
   trex.velocityY = trex.velocityY + 0.5;
   
  //impedir que o trex caia
-  trex.collide(edges[3])
+  trex.collide(ground)
   drawSprites();
 }
